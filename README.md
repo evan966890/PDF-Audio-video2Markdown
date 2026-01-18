@@ -1,196 +1,324 @@
-# PDF-Audio-video2Markdown
+# 📄🎵🎬 PDF-Audio-video2Markdown
 
-[![Python 3.10-3.12](https://img.shields.io/badge/Python-3.10--3.12-blue.svg)](https://www.python.org/)
+> 🤖 **Universal AI Skill** for Claude Code / Cursor / Antigravity / Windsurf and more
+
+[![Claude Code](https://img.shields.io/badge/Claude_Code-Compatible-8A2BE2?logo=anthropic&logoColor=white)](https://claude.ai)
+[![Cursor](https://img.shields.io/badge/Cursor-Compatible-00DC82?logo=cursor&logoColor=white)](https://cursor.com)
+[![Antigravity](https://img.shields.io/badge/Antigravity-Compatible-FF6B6B)](https://antigravity.dev)
+[![Windsurf](https://img.shields.io/badge/Windsurf-Compatible-0EA5E9)](https://windsurf.ai)
+
+[![Python 3.10-3.12](https://img.shields.io/badge/Python-3.10--3.12-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GitHub stars](https://img.shields.io/github/stars/evan966890/PDF-Audio-video2Markdown?style=social)](https://github.com/evan966890/PDF-Audio-video2Markdown)
+[![GitHub forks](https://img.shields.io/github/forks/evan966890/PDF-Audio-video2Markdown?style=social)](https://github.com/evan966890/PDF-Audio-video2Markdown)
 
-将 PDF / 音频 / 视频 / 图像 智能转换为 Markdown 文本的命令行工具。
+---
 
-## 功能特点
+**🇨🇳 中文** | **🇺🇸 English below**
 
-- **多格式支持**: PDF、音频(MP3/WAV/M4A)、视频(MP4/AVI/MKV)、图像(PNG/JPG)
-- **智能处理**: 自动识别文件类型，智能选择最优处理策略
-- **PDF 智能识别**: 自动判断文字层/扫描件，按需 OCR
-- **大文件处理**: 音视频自动分段，避免内存溢出
-- **重试机制**: 内置自动重试，确保处理成功
-- **完全离线**: 所有处理本地完成，保护隐私
-- **零配置**: 自动安装依赖，开箱即用
+将 PDF / 音频 / 视频 / 图像 **智能转换**为 Markdown 文本，特别适合**会议录屏转文字**场景。
 
-## 快速开始
+Intelligently convert PDF, Audio, Video & Images to Markdown text, especially optimized for **meeting recordings transcription**.
 
-### 1. 克隆项目
+---
+
+## 📋 Table of Contents
+
+- [Why This Tool](#-why-this-tool)
+- [Features](#-features)
+- [Quick Start](#-quick-start)
+- [IDE Integration](#-ide-integration)
+- [Usage](#-usage)
+- [Supported Formats](#-supported-formats)
+- [Architecture](#-architecture)
+- [FAQ](#-faq)
+- [Roadmap](#-roadmap)
+- [Contributing](#-contributing)
+- [Acknowledgments](#-acknowledgments)
+
+---
+
+## 🎯 Why This Tool
+
+| Pain Point 痛点 | Solution 解决方案 |
+|----------------|------------------|
+| 会议录屏无法搜索、回顾耗时 | 自动转写为可搜索的 Markdown |
+| 扫描版 PDF 无法复制文字 | 智能 OCR 自动识别 |
+| 音视频文件太大导致内存溢出 | 自动分段处理，30秒一段 |
+| 环境配置复杂、依赖难装 | 一键自动安装，内置重试机制 |
+| 不同 IDE 需要不同配置 | 通用 Skill 格式，一次编写到处使用 |
+
+---
+
+## ✨ Features
+
+| Feature | 功能 | Description |
+|---------|------|-------------|
+| 🔄 **Multi-format** | 多格式支持 | PDF, Audio (MP3/WAV/M4A), Video (MP4/AVI/MKV), Images (PNG/JPG) |
+| 🧠 **Smart OCR** | 智能OCR | Auto-detect scanned vs text PDF, process accordingly |
+| 🎬 **Meeting Ready** | 会议优化 | Optimized for meeting recordings and screen captures |
+| 📦 **Chunked Processing** | 分段处理 | Auto-chunk large files to prevent OOM |
+| 🔁 **Auto Retry** | 自动重试 | Built-in retry mechanism (3x per file, 10x for E2E) |
+| 🔒 **Fully Offline** | 完全离线 | All processing done locally, privacy protected |
+| ⚡ **Zero Config** | 零配置 | Auto-install dependencies, works out of the box |
+| 🌍 **Portable** | 可移植 | Copy to any machine, no absolute paths |
+
+---
+
+## 🚀 Quick Start
+
+### 3 Steps to Get Started
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/PDF-Audio-video2Markdown.git
+# 1. Clone 克隆
+git clone https://github.com/evan966890/PDF-Audio-video2Markdown.git
 cd PDF-Audio-video2Markdown
+
+# 2. Setup 配置环境
+python scripts/setup_environment.py
+
+# 3. Test 测试
+python scripts/run_e2e_test.py
 ```
 
-### 2. 配置环境
+That's it! 就这么简单！
+
+---
+
+## 🔧 IDE Integration
+
+This skill works with **any AI-powered IDE** that supports the skill format:
+
+### Claude Code
 
 ```bash
-cd scripts
-python setup_environment.py
+# Copy to user skills directory
+cp -r PDF-Audio-video2Markdown ~/.claude/skills/
+
+# Or project-level
+cp -r PDF-Audio-video2Markdown .claude/skills/
 ```
 
-脚本会自动：
-- 检查 Python 版本（需 3.10-3.12）
-- 安装所有依赖
-- 验证各引擎可用性
-
-### 3. 运行测试
+### Cursor
 
 ```bash
-python run_e2e_test.py
+# Copy to user skills directory
+cp -r PDF-Audio-video2Markdown ~/.cursor/skills/
+
+# Or project-level
+cp -r PDF-Audio-video2Markdown .cursor/skills/
 ```
 
-## 使用方法
-
-### 处理单个文件
+### Antigravity
 
 ```bash
-python scripts/process_file.py <文件路径> [输出目录]
+cp -r PDF-Audio-video2Markdown ~/.antigravity/skills/
+```
 
-# 示例
+### Windsurf
+
+```bash
+cp -r PDF-Audio-video2Markdown ~/.windsurf/skills/
+```
+
+### Other IDEs
+
+Copy to the IDE's skill directory. The skill follows the standard `SKILL.md` format.
+
+---
+
+## 📖 Usage
+
+### Process Single File | 处理单个文件
+
+```bash
+python scripts/process_file.py <file_path> [output_dir]
+
+# Examples 示例
 python scripts/process_file.py ./input/meeting.mp4
 python scripts/process_file.py ./input/report.pdf ./output
+python scripts/process_file.py ./input/screenshot.png
 ```
 
-### 批量处理
+### Batch Processing | 批量处理
 
 ```bash
-python scripts/process_all.py [输入目录] [输出目录]
+python scripts/process_all.py [input_dir] [output_dir]
 
-# 示例
+# Example 示例
 python scripts/process_all.py ./input ./output
 ```
 
-### 端到端测试
+### End-to-End Test | 端到端测试
 
 ```bash
 python scripts/run_e2e_test.py
 ```
 
-会交互式询问测试文件目录，自动配置环境并循环测试直到成功。
+Interactive test that:
+- Auto-configures environment
+- Asks for test directory
+- Retries until success (max 10 times)
 
-## 支持的文件格式
+---
 
-| 类型 | 格式 | 说明 |
-|------|------|------|
-| 视频 | MP4, AVI, MKV, MOV | 会议录屏、培训视频 |
-| 音频 | MP3, WAV, M4A, FLAC | 会议录音、语音 |
-| PDF | PDF | 文字版/扫描版自动识别 |
-| 图像 | PNG, JPG, JPEG, TIFF | 截图、扫描件 |
+## 📁 Supported Formats
 
-## 处理策略
+| Type 类型 | Formats 格式 | Use Case 适用场景 |
+|----------|-------------|------------------|
+| 🎬 Video | MP4, AVI, MKV, MOV | Meeting recordings, tutorials |
+| 🎵 Audio | MP3, WAV, M4A, FLAC | Voice memos, interviews |
+| 📄 PDF | PDF (text/scanned) | Documents, reports, books |
+| 🖼️ Image | PNG, JPG, JPEG, TIFF | Screenshots, scanned pages |
 
-### PDF
-- **有文字层**: 直接提取（约 0.1 秒/页）
-- **扫描件**: 自动 OCR（约 2 秒/页）
-- **混合文档**: 逐页判断，智能处理
+---
 
-### 音频/视频
-- **小文件 (≤10MB)**: 直接转写
-- **大文件 (>10MB)**: 30 秒分段处理，避免内存溢出
-
-## 输出格式
+## 🏗️ Architecture
 
 ```
-output/
-├── meeting.md          # 转写文本（Markdown）
-├── document.md         # PDF 提取文本
-├── screenshot.md       # 图像 OCR 结果
-└── processing_log.json # 处理日志
+┌─────────────────────────────────────────────────────────────┐
+│                    Input File 输入文件                        │
+└─────────────────────────┬───────────────────────────────────┘
+                          ▼
+┌─────────────────────────────────────────────────────────────┐
+│               File Type Detection 文件类型检测                │
+└─────────────────────────┬───────────────────────────────────┘
+                          ▼
+┌─────────────────────────────────────────────────────────────┐
+│                Smart Router 智能路由                          │
+├──────────────┬──────────────┬──────────────┬────────────────┤
+│   PDF 路由   │  Audio 路由  │  Video 路由  │   Image 路由   │
+├──────┬───────┼──────┬───────┼──────────────┼────────────────┤
+│Text层│Scanned│Small │ Large │Extract Audio │     OCR        │
+│      │       │      │Chunked│              │                │
+├──────┴───────┼──────┴───────┼──────────────┼────────────────┤
+│   PyMuPDF    │    FunASR    │    pydub     │   RapidOCR     │
+│   RapidOCR   │              │   FunASR     │                │
+└──────────────┴──────────────┴──────────────┴────────────────┘
+                          ▼
+┌─────────────────────────────────────────────────────────────┐
+│              Markdown Output 输出 Markdown                   │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-## 目录结构
+### Processing Strategies | 处理策略
 
-```
-PDF-Audio-video2Markdown/
-├── README.md                   # 项目说明
-├── SKILL.md                    # AI 技能描述
-├── LICENSE                     # MIT 许可证
-├── scripts/
-│   ├── setup_environment.py    # 环境配置
-│   ├── process_file.py         # 单文件处理
-│   ├── process_all.py          # 批量处理
-│   └── run_e2e_test.py         # 端到端测试
-├── references/
-│   ├── routing_strategies.md   # 路由策略详解
-│   └── troubleshooting.md      # 故障排查指南
-├── input/                      # 输入文件目录
-└── output/                     # 输出文件目录
-```
+| Scenario 场景 | Strategy 策略 | Speed 速度 |
+|--------------|---------------|-----------|
+| PDF with text layer | Direct extract 直接提取 | ~0.1s/page |
+| Scanned PDF | OCR per page | ~2s/page |
+| Audio ≤10MB | Direct transcribe | Fast |
+| Audio >10MB | 30s chunked | Stable |
+| Video | Extract audio → Transcribe | Depends on length |
 
-## 系统要求
+---
 
-- **Python**: 3.10 - 3.12（必须，3.13+ 不兼容）
-- **FFmpeg**: 推荐安装（音视频处理）
-- **内存**: 建议 8GB+
-- **系统**: Windows / macOS / Linux
+## ❓ FAQ
 
-## 依赖
-
-自动安装，无需手动配置：
-
-| 类别 | 依赖 | 用途 |
-|------|------|------|
-| PDF | pymupdf | PDF 文本提取 |
-| OCR | rapidocr-onnxruntime | 图像/扫描件识别 |
-| ASR | funasr | 语音转文字 |
-| 音频 | pydub | 音频处理/分段 |
-| 工具 | psutil | 系统资源检测 |
-
-## 常见问题
-
-### Python 版本错误
+<details>
+<summary><b>Python version error / Python 版本错误</b></summary>
 
 ```
 [FAIL] Python 3.13 版本过高
 ```
 
-解决：安装 Python 3.10-3.12，或使用 `py -3.12` 指定版本。
+**Solution**: Install Python 3.10-3.12, or use `py -3.12` to specify version.
 
-### 中文乱码 (Windows)
+</details>
+
+<details>
+<summary><b>Chinese garbled text on Windows / Windows 中文乱码</b></summary>
 
 ```powershell
 $env:PYTHONIOENCODING='utf-8'
 python scripts/process_file.py ...
 ```
 
-### 内存不足
+</details>
 
-大文件会自动分段处理。如仍失败，可修改 `scripts/process_file.py` 中的：
+<details>
+<summary><b>Out of memory / 内存不足</b></summary>
+
+Large files are auto-chunked. If still failing, edit `scripts/process_file.py`:
+
 ```python
-AUDIO_CHUNK_DURATION_SEC = 15  # 改为更小的分段
+AUDIO_CHUNK_DURATION_SEC = 15  # Reduce chunk size
 ```
 
-更多问题请参考 `references/troubleshooting.md`。
+</details>
 
-## 技术架构
+<details>
+<summary><b>FFmpeg not found</b></summary>
 
-```
-输入文件 → 文件类型检测 → 智能路由 → 处理引擎 → Markdown 输出
-                              │
-                    ┌─────────┴─────────┐
-                    │                   │
-              PDF 路由              音频路由
-              │     │               │     │
-           文字层  扫描件        小文件  大文件
-              │     │               │     │
-           PyMuPDF RapidOCR     直接处理 分段处理
-                                    │
-                                 FunASR
-```
+Install FFmpeg:
+- **Windows**: `winget install FFmpeg` or download from [ffmpeg.org](https://ffmpeg.org)
+- **macOS**: `brew install ffmpeg`
+- **Linux**: `sudo apt install ffmpeg`
 
-## 许可证
+</details>
 
-MIT License - 详见 [LICENSE](LICENSE)
+More FAQ: See `references/troubleshooting.md`
 
-## 贡献
+---
 
-欢迎提交 Issue 和 Pull Request！
+## 🗺️ Roadmap
 
-## 致谢
+- [x] PDF text extraction & OCR
+- [x] Audio/Video transcription (FunASR)
+- [x] Smart routing & chunked processing
+- [x] Auto environment setup
+- [x] Multi-IDE support (Claude Code, Cursor, etc.)
+- [ ] Speaker diarization (who said what)
+- [ ] Timestamp alignment
+- [ ] Table extraction from PDF
+- [ ] GPU acceleration support
+- [ ] Web UI interface
+- [ ] Docker container
 
-- [PyMuPDF](https://github.com/pymupdf/PyMuPDF) - PDF 处理
-- [RapidOCR](https://github.com/RapidAI/RapidOCR) - OCR 引擎
-- [FunASR](https://github.com/alibaba-damo-academy/FunASR) - 语音识别
+**Have ideas?** [Open an issue](https://github.com/evan966890/PDF-Audio-video2Markdown/issues)!
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! 欢迎贡献！
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+### Quick Contribution Guide
+
+1. Fork the repo
+2. Create feature branch: `git checkout -b feature/amazing-feature`
+3. Commit changes: `git commit -m 'Add amazing feature'`
+4. Push: `git push origin feature/amazing-feature`
+5. Open a Pull Request
+
+### Contributors
+
+<!-- readme: contributors -start -->
+<!-- readme: contributors -end -->
+
+---
+
+## 📜 License
+
+MIT License - see [LICENSE](LICENSE)
+
+---
+
+## 🙏 Acknowledgments
+
+| Project | Usage |
+|---------|-------|
+| [PyMuPDF](https://github.com/pymupdf/PyMuPDF) | PDF text extraction |
+| [RapidOCR](https://github.com/RapidAI/RapidOCR) | OCR engine (ONNX) |
+| [FunASR](https://github.com/alibaba-damo-academy/FunASR) | Speech recognition |
+| [pydub](https://github.com/jiaaro/pydub) | Audio processing |
+
+---
+
+<p align="center">
+  <b>⭐ Star this repo if you find it useful! ⭐</b>
+  <br>
+  <b>如果觉得有用，请点个 Star！</b>
+</p>

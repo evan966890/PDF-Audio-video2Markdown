@@ -1,74 +1,90 @@
 ---
-name: PDF-Audio-video2Markdown
+name: pdf-audio-video-to-markdown
 description: >
-  智能多模态文档转 Markdown 技能，支持 PDF、音频、视频（会议录屏）、图像的统一处理。
-  该技能应在用户需要将文档转换为 Markdown、音视频转录、OCR 识别、会议录屏转文字时使用。
-  包含自动环境配置、智能路由、重试机制和端到端测试功能。
-  完全可移植，可复制到任何电脑使用。
+  Universal AI Skill to convert PDF, audio, video, and images to Markdown text.
+  Use this skill when: transcribing meeting recordings, extracting PDF text,
+  OCR scanned documents, converting audio/video to text, processing conference recordings,
+  batch document conversion, extracting text from screenshots.
+  触发关键词: 转录, 会议录屏, PDF转文字, 音频转文字, 视频转文字, OCR, 文档处理,
+  transcribe, meeting recording, PDF to text, audio to text, video to text, document processing.
+  Works with Claude Code, Cursor, Antigravity, Windsurf, and any IDE supporting skill format.
 ---
 
 # PDF-Audio-video2Markdown
 
-将 PDF / 音频 / 视频 / 图像 智能转换为 Markdown 文本
+🤖 **Universal AI Skill** | 通用 AI 技能
 
-## 概述
+Convert PDF / Audio / Video / Images to Markdown text intelligently.
 
-PDF-Audio-video2Markdown 是一个**完全可移植**的多模态文档智能解析工具，特别适合：
-- 会议录屏转文字
-- PDF 文档提取与 OCR
-- 音频转录
-- 图像文字识别
+将 PDF / 音频 / 视频 / 图像 智能转换为 Markdown 文本。
 
-**版本**: 1.0.0  
-**Python**: 3.10-3.12（必须）
+## Overview | 概述
 
-## 快速开始
+PDF-Audio-video2Markdown is a **fully portable** multimodal document processing skill, optimized for:
 
-### 1. 复制到目标电脑
+- 🎬 **Meeting recordings** → Searchable text (会议录屏转文字)
+- 📄 **PDF documents** → Extracted/OCR text (PDF 文档提取)
+- 🎵 **Audio files** → Transcription (音频转录)
+- 🖼️ **Images** → OCR text (图像文字识别)
 
-将整个 `PDF-Audio-video2Markdown/` 文件夹复制到目标电脑。
+**Version**: 1.0.0  
+**Python**: 3.10-3.12 (required)  
+**Compatibility**: Claude Code, Cursor, Antigravity, Windsurf, and more
 
-### 2. 配置环境
+## Quick Start | 快速开始
+
+### Step 1: Setup Environment | 配置环境
 
 ```bash
-cd PDF-Audio-video2Markdown/scripts
+cd scripts
 python setup_environment.py
 ```
 
-### 3. 准备文件
+### Step 2: Place Files | 放置文件
 
-将待处理文件放入 `./input/` 目录。
+Put files in `./input/` directory.
 
-### 4. 运行测试
+### Step 3: Process | 处理
 
 ```bash
+# Single file 单个文件
+python scripts/process_file.py <file_path> [output_dir]
+
+# Batch processing 批量处理
+python scripts/process_all.py [input_dir] [output_dir]
+
+# End-to-end test 端到端测试
 python scripts/run_e2e_test.py
 ```
 
-## 使用方法
+## Supported Formats | 支持格式
 
-### 处理单个文件
+| Type | Formats |
+|------|---------|
+| Video | MP4, AVI, MKV, MOV |
+| Audio | MP3, WAV, M4A, FLAC |
+| PDF | PDF (text layer / scanned - auto-detect) |
+| Image | PNG, JPG, JPEG, TIFF |
 
-```bash
-python scripts/process_file.py <文件路径> [输出目录]
-```
+## Key Features | 核心特性
 
-### 批量处理
+- ✅ **Smart OCR**: Auto-detect text vs scanned PDF
+- ✅ **Chunked Processing**: Large files split into 30s segments
+- ✅ **Auto Retry**: 3 retries per file, 10 for E2E tests
+- ✅ **Offline Processing**: All local, privacy protected
+- ✅ **Zero Config**: Auto-install dependencies
+- ✅ **Portable**: No absolute paths, copy anywhere
 
-```bash
-python scripts/process_all.py [输入目录] [输出目录]
-```
+## Reference Docs | 参考文档
 
-## 支持格式
+- `references/routing_strategies.md` - Processing logic details
+- `references/troubleshooting.md` - Common issues & solutions
 
-| 类型 | 格式 |
-|------|------|
-| 视频 | MP4, AVI, MKV, MOV |
-| 音频 | MP3, WAV, M4A, FLAC |
-| PDF | PDF（文字版/扫描版自动识别） |
-| 图像 | PNG, JPG, JPEG, TIFF |
+## IDE Installation | IDE 安装
 
-## 参考文档
-
-- `references/routing_strategies.md` - 路由策略详解
-- `references/troubleshooting.md` - 常见问题排查
+| IDE | Path |
+|-----|------|
+| Claude Code | `~/.claude/skills/` or `.claude/skills/` |
+| Cursor | `~/.cursor/skills/` or `.cursor/skills/` |
+| Antigravity | `~/.antigravity/skills/` |
+| Windsurf | `~/.windsurf/skills/` |
